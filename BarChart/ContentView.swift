@@ -38,9 +38,23 @@ struct ContentView: View {
             GroupBox ( "Bar Chart - Sleep Hours") {
                 Chart(sleepDataWeek){
                     BarMark(
-                        x: .value("Date", $0.date),
+                        x: .value("Date", $0.date, unit: .day),
                         y: .value("Hours of Sleep", $0.hoursOfSleep)
                     )
+                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                    .foregroundStyle(Color.orange)
+                }
+                .chartYAxis {
+                    AxisMarks(position: .leading)
+                }
+                .chartXAxis {
+                    
+                    AxisMarks(values: .stride(by: .day)){ value in
+                        AxisGridLine()
+                            .foregroundStyle(.red)
+                        AxisValueLabel(format:
+                                .dateTime.weekday(), centered: true)
+                    }
                 }
             }
             .frame(height: 500)
