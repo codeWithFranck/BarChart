@@ -34,12 +34,19 @@ struct ContentView: View {
     ]
 
     var body: some View {
-        Chart(sleepDataWeek){
-            BarMark(
-                x: .value("Date", $0.date),
-                y: .value("Hours of Sleep", $0.hoursOfSleep)
-            )
+        VStack {
+            GroupBox ( "Bar Chart - Sleep Hours") {
+                Chart(sleepDataWeek){
+                    BarMark(
+                        x: .value("Date", $0.date),
+                        y: .value("Hours of Sleep", $0.hoursOfSleep)
+                    )
+                }
+            }
+            .frame(height: 500)
+            Spacer()
         }
+        .padding()
     }
 }
 
